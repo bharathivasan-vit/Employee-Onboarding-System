@@ -20,20 +20,20 @@ public class AdminServiceImpl implements AdminService {
     public List<Map<String,Object>> getOnboardingBulkRecordsClearView() {
         List<Map<String,Object>> records = userOnboardingStatusRepo.findBulkOnboardingRecords();
         List<Map<String,Object>> onboarding = new ArrayList<>();
-        List<Map<String,Object>> checklist = new ArrayList<>();
         List<Long> userIdContainer = new ArrayList<>();
 
         for (Map<String, Object> userRecord : records) {
-            Long userId = (Long) userRecord.get("userid");
+            Long userId = ((Number) userRecord.get("userid")).longValue();
             if (!userIdContainer.contains(userId)) {
                 userIdContainer.add(userId);
                 Map<String,Object> userMap = new LinkedHashMap<>();
-                userMap.put("userId", userRecord.get("userid"));
+                userMap.put("userId", userId);
                 userMap.put("userName", userRecord.get("username"));
                 userMap.put("emailId", userRecord.get("emailid"));
                 userMap.put("phoneNumber", userRecord.get("phonenumber"));
                 userMap.put("roleName", userRecord.get("rolename"));
-                userMap.put("checkList", checklist);
+
+                List<Map<String,Object>> checklist = new ArrayList<>();
 
                 Map<String,Object> checklistMap = new LinkedHashMap<>();
                 checklistMap.put("checkListContent", userRecord.get("checkListContent"));
@@ -43,38 +43,46 @@ public class AdminServiceImpl implements AdminService {
                 checklistMap.put("modifiedDate", userRecord.get("modifiedDate"));
                 checklist.add(checklistMap);
 
+                userMap.put("checkList", checklist);
                 onboarding.add(userMap);
             } else {
-                Map<String,Object> checklistMap = new LinkedHashMap<>();
-                checklistMap.put("checkListContent", userRecord.get("checkListContent"));
-                checklistMap.put("checklistDescription", userRecord.get("checklistDescription"));
-                checklistMap.put("status", userRecord.get("status"));
-                checklistMap.put("createdDate", userRecord.get("createdDate"));
-                checklistMap.put("modifiedDate", userRecord.get("modifiedDate"));
+                for (Map<String,Object> u : onboarding) {
+                    if (u.get("userId").equals(userId)) {
+                        List<Map<String,Object>> checklist = (List<Map<String,Object>>) u.get("checkList");
 
-                checklist.add(checklistMap);
+                        Map<String,Object> checklistMap = new LinkedHashMap<>();
+                        checklistMap.put("checkListContent", userRecord.get("checkListContent"));
+                        checklistMap.put("checklistDescription", userRecord.get("checklistDescription"));
+                        checklistMap.put("status", userRecord.get("status"));
+                        checklistMap.put("createdDate", userRecord.get("createdDate"));
+                        checklistMap.put("modifiedDate", userRecord.get("modifiedDate"));
+                        checklist.add(checklistMap);
+                        break;
+                    }
+                }
             }
         }
         return onboarding;
     }
 
+
     public List<Map<String,Object>> getOnboardingBulkRecordsByFilter(LocalDate startDate,LocalDate endDate,Boolean status,Integer roleId,String emailId){
         List<Map<String,Object>> records= userOnboardingStatusRepo.findBulkOnboardingRecordsByFilter(startDate,endDate,status,roleId,emailId);
         List<Map<String,Object>> onboarding = new ArrayList<>();
-        List<Map<String,Object>> checklist = new ArrayList<>();
         List<Long> userIdContainer = new ArrayList<>();
 
         for (Map<String, Object> userRecord : records) {
-            Long userId = (Long) userRecord.get("userid");
+            Long userId = ((Number) userRecord.get("userid")).longValue();
             if (!userIdContainer.contains(userId)) {
                 userIdContainer.add(userId);
                 Map<String,Object> userMap = new LinkedHashMap<>();
-                userMap.put("userId", userRecord.get("userid"));
+                userMap.put("userId", userId);
                 userMap.put("userName", userRecord.get("username"));
                 userMap.put("emailId", userRecord.get("emailid"));
                 userMap.put("phoneNumber", userRecord.get("phonenumber"));
                 userMap.put("roleName", userRecord.get("rolename"));
-                userMap.put("checkList", checklist);
+
+                List<Map<String,Object>> checklist = new ArrayList<>();
 
                 Map<String,Object> checklistMap = new LinkedHashMap<>();
                 checklistMap.put("checkListContent", userRecord.get("checkListContent"));
@@ -84,16 +92,23 @@ public class AdminServiceImpl implements AdminService {
                 checklistMap.put("modifiedDate", userRecord.get("modifiedDate"));
                 checklist.add(checklistMap);
 
+                userMap.put("checkList", checklist);
                 onboarding.add(userMap);
             } else {
-                Map<String,Object> checklistMap = new LinkedHashMap<>();
-                checklistMap.put("checkListContent", userRecord.get("checkListContent"));
-                checklistMap.put("checklistDescription", userRecord.get("checklistDescription"));
-                checklistMap.put("status", userRecord.get("status"));
-                checklistMap.put("createdDate", userRecord.get("createdDate"));
-                checklistMap.put("modifiedDate", userRecord.get("modifiedDate"));
+                for (Map<String,Object> u : onboarding) {
+                    if (u.get("userId").equals(userId)) {
+                        List<Map<String,Object>> checklist = (List<Map<String,Object>>) u.get("checkList");
 
-                checklist.add(checklistMap);
+                        Map<String,Object> checklistMap = new LinkedHashMap<>();
+                        checklistMap.put("checkListContent", userRecord.get("checkListContent"));
+                        checklistMap.put("checklistDescription", userRecord.get("checklistDescription"));
+                        checklistMap.put("status", userRecord.get("status"));
+                        checklistMap.put("createdDate", userRecord.get("createdDate"));
+                        checklistMap.put("modifiedDate", userRecord.get("modifiedDate"));
+                        checklist.add(checklistMap);
+                        break;
+                    }
+                }
             }
         }
         return onboarding;

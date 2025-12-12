@@ -1,6 +1,6 @@
 package com.employee.onboarding.employee_onboarding_system.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.time.LocalDateTime;
 

@@ -22,11 +22,11 @@ public class AppSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
+        http.cors().configurationSource(corsConfigurationSource());
 
-        http.csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
+        http.csrf().disable()
+                .authorizeHttpRequests()
+                        .antMatchers(
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
@@ -34,11 +34,10 @@ public class AppSecurityConfig {
                                 "/configuration/**",
                                 "/webjars/**"
                         ).permitAll()
-                        .requestMatchers("/eobs/auth/**", "/eobs/admin/**", "/eobs/client/**").permitAll()
+                        .antMatchers("/eobs/auth/**", "/eobs/admin/**", "/eobs/client/**").permitAll()
 //                        .requestMatchers("/eobs/client/**").authenticated()
-                        .anyRequest().denyAll()
-                )
-                .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+                        .anyRequest().denyAll();
+                http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

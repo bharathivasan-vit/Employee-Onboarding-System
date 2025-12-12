@@ -3,7 +3,7 @@ package com.employee.onboarding.employee_onboarding_system.service.admin;
 import com.employee.onboarding.employee_onboarding_system.entity.CheckListEntity;
 import com.employee.onboarding.employee_onboarding_system.exception.ResourceNotFoundException;
 import com.employee.onboarding.employee_onboarding_system.repository.CheckListRepo;
-import jakarta.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -19,7 +19,7 @@ public class EobServiceImpl implements EobService {
     @Autowired UserOnboardingStatusRepo userOnboardingStatusRepo;
 
     @Override
-    public List<Map<String,Object>> getAllRoleList() {
+    public List<Map<String,Object>> getAllRoleList() throws ResourceNotFoundException{
         List<Map<String,Object>> roles = roleListRepo.findAllVisibleRoles();
         if(roles.isEmpty()){
             throw new ResourceNotFoundException("Roles not found");
@@ -27,7 +27,7 @@ public class EobServiceImpl implements EobService {
         return roles;
     }
     @Override
-    public List<Map<String, Object>> getUsersById(int id) {
+    public List<Map<String, Object>> getUsersById(int id) throws ResourceNotFoundException{
         List<Map<String, Object>> user = userDetailsRepo.findByUserId(id);
         if(user.isEmpty()){
             throw new ResourceNotFoundException("User records Not found");
@@ -35,7 +35,7 @@ public class EobServiceImpl implements EobService {
         return user;
     }
     @Override
-    public List<Map<String, Object>> getChecklistForUser(int id){
+    public List<Map<String, Object>> getChecklistForUser(int id) throws ResourceNotFoundException{
         List<Map<String, Object>> checkList = userOnboardingStatusRepo.findChecklistByUserId(id);
         if(checkList.isEmpty()){
             throw new ResourceNotFoundException("CheckList records Not found");
@@ -43,7 +43,7 @@ public class EobServiceImpl implements EobService {
         return checkList;
     }
     @Override
-    public String setStatus(int userId,int checkListId,boolean status){
+    public String setStatus(int userId,int checkListId,boolean status) throws ResourceNotFoundException{
         LocalDateTime currentTime = LocalDateTime.now();
         int rowsUpdated = userOnboardingStatusRepo.findByUserAndChecklist(userId,checkListId,status,currentTime);
         if(rowsUpdated == 0){
