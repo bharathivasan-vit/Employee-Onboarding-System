@@ -59,48 +59,47 @@ public class EobUserServiceImpl implements EobUserService {
         existingUser.setOtpGeneratedTime(LocalDateTime.now());
         userDetailsRepo.save(existingUser);
         String msgSubject = "Regarding OTP for Employee Onboarding";
-//        String msgBody = """
-//                        <!DOCTYPE html>
-//                        <html>
-//                        <head>
-//                        <title>VIT Help Center (Chennai Campus)</title>
-//                        </head>
-//                        <body style="font-family: Arial, sans-serif;">
-//                        <table style="border-collapse: collapse; width: 100%;">
-//                            <tr>
-//                                <th style="background-color: #04AA6D; color: white; padding: 8px; border: 1px solid #ddd;">
-//                                    Dear User
-//                                </th>
-//                            </tr>
-//                            <tr>
-//                                <td style="padding: 8px; border: 1px solid #ddd;">
-//                                    Welcome to VIT!....
-//                                </td>
-//                            </tr>
-//                        </table>
-//                        <p style="margin-top: 16px; font-size: 16px;">
-//                            <strong>Please use the following OTP for &nbsp;""" + action + """
-//                            to Employee Onboarding:</strong>
-//                        </p>
-//                        <p style="font-size: 22px; font-weight: bold; color: #0A66C2;">
-//                        """ + otp + """
-//                        </p>
-//                        <p style="margin-top: 20px; font-size: 16px;">
-//                            Thanks and Regards<br/>
-//                            Software Development Cell<br/>
-//                            Vellore Institute of Technology<br/>
-//                            Chennai - 600127
-//                        </p>
-//                        <p style="margin-top: 20px; font-style: italic;">
-//                            This is an auto-generated email hence do not reply.
-//                        </p>
-//                        </body>
-//                        </html>""";
+        String msgBody =
+                "<!DOCTYPE html>" +
+                        "<html>" +
+                        "<head>" +
+                        "<title>VIT Help Center (Chennai Campus)</title>" +
+                        "</head>" +
+                        "<body style=\"font-family: Arial, sans-serif;\">" +
+                        "<table style=\"border-collapse: collapse; width: 100%;\">" +
+                        "<tr>" +
+                        "<th style=\"background-color: #04AA6D; color: white; padding: 8px; border: 1px solid #ddd;\">" +
+                        "Dear User" +
+                        "</th>" +
+                        "</tr>" +
+                        "<tr>" +
+                        "<td style=\"padding: 8px; border: 1px solid #ddd;\">" +
+                        "Welcome to VIT!...." +
+                        "</td>" +
+                        "</tr>" +
+                        "</table>" +
+                        "<p style=\"margin-top: 16px; font-size: 16px;\">" +
+                        "<strong>Please use the following OTP for " + action + " to Employee Onboarding:</strong>" +
+                        "</p>" +
+                        "<p style=\"font-size: 22px; font-weight: bold; color: #0A66C2;\">" +
+                        otp +
+                        "</p>" +
+                        "<p style=\"margin-top: 20px; font-size: 16px;\">" +
+                        "Thanks and Regards<br/>" +
+                        "Software Development Cell<br/>" +
+                        "Vellore Institute of Technology<br/>" +
+                        "Chennai - 600127" +
+                        "</p>" +
+                        "<p style=\"margin-top: 20px; font-style: italic;\">" +
+                        "This is an auto-generated email hence do not reply." +
+                        "</p>" +
+                        "</body>" +
+                        "</html>";
 
 //        emailService.sendEmail(userInput.getEmailId(), msgSubject, msgBody);
+//        return "OTP sent successfully To : "+ userInput.getEmailId() ;
 
         return "OTP sent successfully To : "+ userInput.getEmailId() +"-"+"Your OTP :"+otp;
-//        return "OTP sent successfully To : "+ userInput.getEmailId() ;
     }
     @Override
     public UserDetailsEntity register(UserDetailsEntity userInput,HttpServletRequest request){
