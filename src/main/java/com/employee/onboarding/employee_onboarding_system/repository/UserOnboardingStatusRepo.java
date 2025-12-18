@@ -42,9 +42,9 @@ public interface UserOnboardingStatusRepo extends JpaRepository<UserOnboardingSt
             "WHERE o.check_list_id = c.check_list_id " +
             "AND u.user_id = o.user_id " +
             "AND r.role_id = u.role_id " +
-            "AND DATE(o.modified_date) BETWEEN COALESCE(?1, DATE(o.modified_date)) AND COALESCE(?2, DATE(o.modified_date)) " +
+            "AND DATE(o.created_date) BETWEEN COALESCE(?1, DATE(o.created_date)) AND COALESCE(?2, DATE(o.created_date)) " +
             "AND o.status = COALESCE(?3, o.status) " +
             "AND r.role_name = COALESCE((SELECT role_name FROM ipr.eob_role WHERE role_id = ?4), r.role_name) " +
-            "AND u.email_id = COALESCE(?5, u.email_id)", nativeQuery = true)
+            "AND (u.user_name || ' ' || u.email_id || ' ' || c.check_list_content) like %?5%", nativeQuery = true)
     List<Map<String,Object>> findBulkOnboardingRecordsByFilter(LocalDate startDate, LocalDate endDate, Boolean status, Integer roleId, String emailId);
 }

@@ -30,6 +30,13 @@ public class AdminRoleServiceImpl implements AdminRoleService{
         }
         return roles;
     }
+    public List<Map<String,Object>> getRoleByName(String roleName) throws ResourceNotFoundException{
+        List<Map<String,Object>> roles = roleListRepo.findRoleByName(roleName);
+        if(roles.isEmpty()){
+            throw new ResourceNotFoundException("Role not found");
+        }
+        return roles;
+    }
     public RoleListEntity createRole(RoleListEntity inputRole,HttpServletRequest request) throws NullPointerException{
             if (inputRole.getRoleName().isEmpty()) {
                 throw new NullPointerException("Role input is null");

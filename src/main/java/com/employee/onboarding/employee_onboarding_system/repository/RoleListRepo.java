@@ -19,4 +19,6 @@ public interface RoleListRepo extends JpaRepository<RoleListEntity,Integer> {
     List<Map<String,Object>> findRolesById(int roleId);
     @Query(value = "select * from ipr.eob_role where role_id = ?1 ORDER BY role_id ASC",nativeQuery = true)
     RoleListEntity findByRoleIdUpdate(int roleId);
+    @Query(value = "select role_id AS roleId, role_name AS roleName, is_active AS isActive from ipr.eob_role where role_name like %?1%",nativeQuery = true)
+    List<Map<String,Object>> findRoleByName(String roleName);
 }

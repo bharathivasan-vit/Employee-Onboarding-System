@@ -9,4 +9,5 @@ public interface AdminService {
     List<Map<String,Object>> getOnboardingBulkRecordsClearView();
     List<Map<String,Object>> getOnboardingBulkRecordsByFilter(LocalDate startDate,LocalDate endDate,Boolean status,Integer roleId,String emailId);
     List<Map<String,Object>> getAllUsersByVerified();
+    List<Map<String,Object>> getUsersByName(String userName);
 }

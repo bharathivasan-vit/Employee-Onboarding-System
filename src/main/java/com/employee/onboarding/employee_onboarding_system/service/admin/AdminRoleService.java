@@ -9,6 +9,7 @@ import java.util.Map;
 public interface AdminRoleService {
     List<Map<String,Object>> getAllRole();
     List<Map<String,Object>> getRoleById(int roleId);
+    List<Map<String,Object>> getRoleByName(String roleName);
     RoleListEntity createRole(RoleListEntity inputRole, HttpServletRequest request);
     RoleListEntity updateRole(int roleId, RoleListEntity inputRole, HttpServletRequest request);
 }

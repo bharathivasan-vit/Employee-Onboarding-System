@@ -134,7 +134,7 @@ public class EobUserServiceImpl implements EobUserService {
         }
         if(otpValidation(existingUser.getOtp(),existingUser.getOtpGeneratedTime(),userInput.getOtp())){
             existingUser.setOtpVerified(true);
-            existingUser.setCreatedDate(LocalDateTime.now());
+//            existingUser.setCreatedDate(LocalDateTime.now());
             existingUser.setCreatedUser("SDC");
             existingUser.setModifiedDate(LocalDateTime.now());
             existingUser.setModifiedUser("SDC");

@@ -43,6 +43,18 @@ public class AdminRoleController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(createResponse(500,e.getMessage(),null));
         }
     }
+    @PostMapping("/getRoleByName")
+    public ResponseEntity<Map<String,Object>> getRoleByName(@RequestBody RoleListEntity inputRoleName) {
+        try{
+            String roleName = inputRoleName.getRoleName();
+            List<Map<String, Object>> result = adminRoleService.getRoleByName(roleName);
+            return ResponseEntity.ok(createResponse(200,"Role Fetched Successfully",result));
+        }catch (ResourceNotFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(createResponse(404,e.getMessage(),null));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(createResponse(500,e.getMessage(),null));
+        }
+    }
     @PostMapping("/createRole")
     public ResponseEntity<Map<String,Object>> createRole(@RequestBody RoleListEntity inputRole,HttpServletRequest request) {
         try{

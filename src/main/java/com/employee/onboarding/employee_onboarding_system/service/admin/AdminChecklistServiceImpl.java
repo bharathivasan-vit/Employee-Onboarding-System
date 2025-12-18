@@ -30,6 +30,13 @@ public class AdminChecklistServiceImpl implements AdminChecklistService{
         }
         return checklist;
     }
+    public List<Map<String,Object>> getChecklistByName(String checklistName) throws ResourceNotFoundException{
+        List<Map<String, Object>> checklist = checkListRepo.findChecklistByName(checklistName);
+        if(checklist.isEmpty()){
+            throw new ResourceNotFoundException("Checklist not found");
+        }
+        return checklist;
+    }
     public List<Map<String,Object>> getChecklistByRole(int roleId) throws ResourceNotFoundException{
         List<Map<String, Object>> checklist = checkListRepo.findChecklistByRole(roleId);
         if(checklist.isEmpty()){

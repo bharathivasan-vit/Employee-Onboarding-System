@@ -18,4 +18,6 @@ public interface CheckListRepo extends JpaRepository<CheckListEntity, Integer> {
     List<Map<String,Object>> findChecklistByRole(int roleId);
     @Query(value = "select * from ipr.eob_check_list where check_list_id = ?1 ORDER BY check_list_id ASC",nativeQuery = true)
     CheckListEntity findByChecklistIdUpadte(int checklistId);
+    @Query(value = "select check_list_id AS checklistId,role_id AS roleId,check_list_content AS checklistContent,checklist_description AS ChecklistDescription,is_active AS isActive from ipr.eob_check_list where check_list_content like %?1%",nativeQuery = true)
+    List<Map<String,Object>> findChecklistByName(String checklistName);
 }

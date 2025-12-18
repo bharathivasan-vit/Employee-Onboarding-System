@@ -9,6 +9,7 @@ import java.util.Map;
 public interface AdminChecklistService {
     List<Map<String,Object>> getAllChecklist();
     List<Map<String,Object>> getChecklistById(int checklistId);
+    List<Map<String,Object>> getChecklistByName(String checklistName);
     List<Map<String,Object>> getChecklistByRole(int roleId);
     CheckListEntity createChecklist(CheckListEntity inputChecklis, HttpServletRequest request);
     CheckListEntity updateChecklist(int checklistId, CheckListEntity inputChecklis, HttpServletRequest request);

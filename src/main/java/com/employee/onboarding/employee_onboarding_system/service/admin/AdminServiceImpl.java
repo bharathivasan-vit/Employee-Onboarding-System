@@ -1,5 +1,6 @@
 package com.employee.onboarding.employee_onboarding_system.service.admin;
 
+import com.employee.onboarding.employee_onboarding_system.exception.ResourceNotFoundException;
 import com.employee.onboarding.employee_onboarding_system.repository.UserDetailsRepo;
 import com.employee.onboarding.employee_onboarding_system.repository.UserOnboardingStatusRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,6 +117,13 @@ public class AdminServiceImpl implements AdminService {
 
     public List<Map<String,Object>> getAllUsersByVerified(){
         return userDetailsRepo.findUserByVerified();
+    }
+    public List<Map<String,Object>> getUsersByName(String userName){
+        List<Map<String,Object>> users = userDetailsRepo.findUserByName(userName);
+        if(users.isEmpty()){
+            throw new ResourceNotFoundException("User not found");
+        }
+        return users;
     }
 
 }
