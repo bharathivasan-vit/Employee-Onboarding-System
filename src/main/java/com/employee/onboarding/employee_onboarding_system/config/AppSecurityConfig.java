@@ -1,3 +1,4 @@
+/*
 package com.employee.onboarding.employee_onboarding_system.config;
 
 import java.util.Arrays;
@@ -11,7 +12,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
-public class AppSecurityConfig {
+public class AppSecurityConfig  {
 
     private final JwtTokenFilter jwtTokenFilter;
 
@@ -19,10 +20,11 @@ public class AppSecurityConfig {
         this.jwtTokenFilter = jwtTokenFilter;
     }
 
-    @Bean
+   */
+/* @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.cors().configurationSource(corsConfigurationSource());
+//        http.cors().configurationSource(corsConfigurationSource());
 
         http.csrf().disable()
                 .authorizeHttpRequests()
@@ -40,9 +42,11 @@ public class AppSecurityConfig {
                 http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
-    }
+    }*//*
 
-    @Bean
+
+  */
+/*  @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
         CorsConfiguration config = new CorsConfiguration();
@@ -63,5 +67,6 @@ public class AppSecurityConfig {
         source.registerCorsConfiguration("/**", config);
 
         return source;
-    }
-}
+    }*//*
+
+}*/

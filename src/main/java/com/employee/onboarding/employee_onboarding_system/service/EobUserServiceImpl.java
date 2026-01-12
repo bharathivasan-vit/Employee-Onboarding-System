@@ -98,7 +98,6 @@ public class EobUserServiceImpl implements EobUserService {
 
 //        emailService.sendEmail(userInput.getEmailId(), msgSubject, msgBody);
 //        return "OTP sent successfully To : "+ userInput.getEmailId() ;
-
         return "OTP sent successfully To : "+ userInput.getEmailId() +"-"+"Your OTP :"+otp;
     }
     @Override
@@ -134,7 +133,6 @@ public class EobUserServiceImpl implements EobUserService {
         }
         if(otpValidation(existingUser.getOtp(),existingUser.getOtpGeneratedTime(),userInput.getOtp())){
             existingUser.setOtpVerified(true);
-//            existingUser.setCreatedDate(LocalDateTime.now());
             existingUser.setCreatedUser("SDC");
             existingUser.setModifiedDate(LocalDateTime.now());
             existingUser.setModifiedUser("SDC");
@@ -154,16 +152,19 @@ public class EobUserServiceImpl implements EobUserService {
         List<Integer> listOfcheckList = checkListRepo.findCheckListByRoleId(roleId);
         List<UserOnboardingStatusEntity> onboardingStatusList = new ArrayList<>();
         for (Integer check : listOfcheckList){
-            UserOnboardingStatusEntity userOnboardingStatus = new UserOnboardingStatusEntity();
-            userOnboardingStatus.setUserId(userId);
-            userOnboardingStatus.setCheckListId(check);
-            userOnboardingStatus.setStatus(false);
-            userOnboardingStatus.setCreatedDate(LocalDateTime.now());
-            userOnboardingStatus.setCreatedUser("SDC");
-            userOnboardingStatus.setModifiedDate(LocalDateTime.now());
-            userOnboardingStatus.setModifiedUser("SDC");
-            userOnboardingStatus.setIpAddress(ipAddress);
-            onboardingStatusList.add(userOnboardingStatus);
+            if (userOnboardingStatusRepo.existingUserAndChecklist(userId, check) <= 0) {
+                System.out.println(userOnboardingStatusRepo.existingUserAndChecklist(userId, check));
+                UserOnboardingStatusEntity userOnboardingStatus = new UserOnboardingStatusEntity();
+                userOnboardingStatus.setUserId(userId);
+                userOnboardingStatus.setCheckListId(check);
+                userOnboardingStatus.setStatus(false);
+                userOnboardingStatus.setCreatedDate(LocalDateTime.now());
+                userOnboardingStatus.setCreatedUser("SDC");
+                userOnboardingStatus.setModifiedDate(LocalDateTime.now());
+                userOnboardingStatus.setModifiedUser("SDC");
+                userOnboardingStatus.setIpAddress(ipAddress);
+                onboardingStatusList.add(userOnboardingStatus);
+            }
 
         }
         userOnboardingStatusRepo.saveAll(onboardingStatusList);

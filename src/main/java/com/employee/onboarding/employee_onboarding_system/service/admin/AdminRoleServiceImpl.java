@@ -6,16 +6,13 @@ import com.employee.onboarding.employee_onboarding_system.repository.RoleListRep
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
 @Service
 public class AdminRoleServiceImpl implements AdminRoleService{
-    @Autowired
-    RoleListRepo roleListRepo;
-
+    @Autowired RoleListRepo roleListRepo;
     public List<Map<String,Object>> getAllRole() throws ResourceNotFoundException{
         List<Map<String,Object>> roles = roleListRepo.findAllRoles();
         if(roles.isEmpty()){
@@ -53,7 +50,6 @@ public class AdminRoleServiceImpl implements AdminRoleService{
 
             return roleListRepo.save(role);
     }
-
     public RoleListEntity updateRole(int roleId, RoleListEntity inputRole, HttpServletRequest request) throws NullPointerException,ResourceNotFoundException{
         String ipAddress = request.getRemoteAddr();
         RoleListEntity existingRole = roleListRepo.findByRoleIdUpdate(roleId);

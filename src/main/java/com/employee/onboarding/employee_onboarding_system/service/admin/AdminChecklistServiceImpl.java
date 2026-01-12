@@ -6,16 +6,13 @@ import com.employee.onboarding.employee_onboarding_system.repository.CheckListRe
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
 @Service
 public class AdminChecklistServiceImpl implements AdminChecklistService{
-    @Autowired
-    CheckListRepo checkListRepo;
-
+    @Autowired CheckListRepo checkListRepo;
     public List<Map<String,Object>> getAllChecklist() throws ResourceNotFoundException{
         List<Map<String, Object>> checklist = checkListRepo.findAllChecklist();
         if(checklist.isEmpty()){
@@ -62,7 +59,6 @@ public class AdminChecklistServiceImpl implements AdminChecklistService{
 
         return checkListRepo.save(checkList);
     }
-
     public CheckListEntity updateChecklist(int checklistId, CheckListEntity inputChecklis, HttpServletRequest request) throws NullPointerException,ResourceNotFoundException{
         String ipAddress = request.getRemoteAddr();
         CheckListEntity existingChecklist = checkListRepo.findByChecklistIdUpadte(checklistId);
@@ -82,5 +78,4 @@ public class AdminChecklistServiceImpl implements AdminChecklistService{
         }
         return checkListRepo.save(existingChecklist);
     }
-
 }

@@ -67,7 +67,6 @@ public class EobUserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(createResponse(500,e.getMessage(),null));
         }
     }
-
     private Map<String, Object> createResponse(int status, String message, Object data) {
         Map<String, Object> map = new HashMap<>();
         map.put(STATUS, status);

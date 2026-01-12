@@ -17,7 +17,6 @@ public class EobServiceImpl implements EobService {
     @Autowired RoleListRepo roleListRepo;
     @Autowired UserDetailsRepo userDetailsRepo;
     @Autowired UserOnboardingStatusRepo userOnboardingStatusRepo;
-
     @Override
     public List<Map<String,Object>> getAllRoleList() throws ResourceNotFoundException{
         List<Map<String,Object>> roles = roleListRepo.findAllVisibleRoles();
