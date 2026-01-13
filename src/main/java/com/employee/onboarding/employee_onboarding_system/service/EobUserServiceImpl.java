@@ -96,9 +96,9 @@ public class EobUserServiceImpl implements EobUserService {
                         "</body>" +
                         "</html>";
 
-//        emailService.sendEmail(userInput.getEmailId(), msgSubject, msgBody);
-//        return "OTP sent successfully To : "+ userInput.getEmailId() ;
-        return "OTP sent successfully To : "+ userInput.getEmailId() +"-"+"Your OTP :"+otp;
+        emailService.sendEmail(userInput.getEmailId(), msgSubject, msgBody);
+        return "OTP sent successfully To : "+ userInput.getEmailId() ;
+//        return "OTP sent successfully To : "+ userInput.getEmailId() +"-"+"Your OTP :"+otp;
     }
     @Override
     public UserDetailsEntity register(UserDetailsEntity userInput,HttpServletRequest request){
